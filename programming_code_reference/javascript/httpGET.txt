@@ -1,0 +1,19 @@
+const url = “url”
+let headers = new Headers();
+let request = new Request(
+            url, {
+            headers: headers,
+            method: 'get',
+            mode: 'cors',
+        }
+        );
+fetch(request)
+	.then(response => response.json())
+		.then(responseJson => {
+			let { data0, data1, data2 } = responseJson;
+			console.log(`Fetch ${url}:\n`, responseJson)
+			// do whatever with the data
+		})
+		.catch(message => {
+			 alert(`${url}:\n ${message}:\n CATCH ERROR`)
+		});

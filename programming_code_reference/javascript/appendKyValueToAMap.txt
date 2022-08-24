@@ -1,0 +1,1 @@
+data = data.map(v => ({ ...v, abc: false, def: 0 }))

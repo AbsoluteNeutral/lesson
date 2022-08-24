@@ -1,0 +1,33 @@
+Image converter (xnconvert.exe): 			https://www.xnview.com/en/xnconvert/#downloads
+Snap Image (SETUNA.exe)						https://github.com/tylearymf/SETUNA2/releass
+making 2D animation video using images		http://monkeyjam.org/
+Count lines of code 						https://sourceforge.net/projects/cloc/files/cloc/v1.60/
+
+
+
+My Programming software backup:
+https://mega.nz/folder/tVdBWCZA#7khYL_IiQJUkvAnUv9Nqpg
+
+7z										https://www.7-zip.org/download.html
+AnyDesk									https://anydesk.com/en
+Baka-MPlayer							https://u8sand.github.io/Baka-MPlayer/installation/
+ChromeSetup								https://www.google.com/chrome/
+draw.io-13.9.9							https://portapps.io/app/drawio-portable/
+gimp-2.10.22							https://www.gimp.org/downloads/ , https://portableapps.com/apps/graphics_pictures/gimp_portable
+Git-2.30.0-64bit						https://git-scm.com/downloads
+go1.15.3								https://golang.org/dl/
+LibreOffice
+LibreOfficePortable						https://www.libreoffice.org/download/portable-versions/
+mysql-installer-community-8.0.22.0.msi	https://dev.mysql.com/downloads/mysql/
+node-v12.18.4-x64.msi					https://nodejs.org/en/download/
+npp										https://notepad-plus-plus.org/downloads/
+PacketSenderPortable					https://packetsender.com/download#show
+Postman									https://www.postman.com/downloads/
+python-3.9.0							https://www.python.org/downloads/
+cygwin setup							https://cygwin.com/install.html
+sourceTree								https://www.sourcetreeapp.com/
+SQLLiteDatabaseBrowswerPortable			https://portableapps.com/apps/development/sqlite_database_browser_portable
+vlc										https://www.videolan.org/
+VSCodeUserSetup							https://code.visualstudio.com/download
+WhiteStarUML							https://sourceforge.net/projects/whitestaruml/
+Winmerge								https://winmerge.org/downloads/?lang=en

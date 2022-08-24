@@ -1,0 +1,67 @@
+Handout 001
+
+- Write a program that input a value and output the number of coins for the following category:
+	- dollar coin
+	- fifty-cent coin
+	- twenty-cent coin
+	- ten-cent coin
+	- five-cent coin
+	- one-cent coin
+	
+- Use the input.txt from the input folder to test.
+- Match the result from the output folder.
+
+
+--------------------------------------------------
+Example 1: 
+--------------------------------------------------
+Input: 
+Please Enter a value: 12.88678
+
+Output:
+Values Entered:$12.88
+There are 12 dollar coins.
+There is 1 fifty-cent coin.
+There is 1 twenty-cent coin.
+There is 1 ten-cent coin.
+There is 1 five-cent coin.
+There are 3 one-cent coins.
+
+--------------------------------------------------
+Example 2:
+--------------------------------------------------
+Input: 
+Please Enter a value: 1
+
+Output:
+Values Entered:$1.00
+There is 1 dollar coin
+There is 0 fifty-cent coin
+There is 0 twenty-cent coin
+There is 0 ten-cent coin
+There is 0 five-cent coin
+There is 0 one-cent coin
+
+--------------------------------------------------
+Example 3:
+--------------------------------------------------
+Input: 
+Please Enter a value: 0
+
+Output:
+Values Entered:$0.00
+There is 0 dollar coin.
+There is 0 fifty-cent coin.
+There is 0 twenty-cent coin.
+There is 0 ten-cent coin.
+There is 0 five-cent coin.
+There is 0 one-cent coin.
+
+--------------------------------------------------
+Example 4:
+--------------------------------------------------
+Input: 
+Please Enter a value: 
+
+Output:
+Wrong input

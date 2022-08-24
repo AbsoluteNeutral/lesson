@@ -1,0 +1,8 @@
+Please Enter a value:
+Values Entered:$32556.32
+There are 32556 dollar coins.
+There is 0 fifty-cent coin.
+There is 1 twenty-cent coin.
+There is 1 ten-cent coin.
+There is 0 five-cent coin.
+There are 2 one-cent coins.

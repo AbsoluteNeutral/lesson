@@ -1,0 +1,29 @@
+https://stackoverflow.com/questions/19820724/replace-into-query-syntax
+
+// ========== SYNTAX:
+REPLACE INTO table(column_list)
+VALUES(value_list);
+
+Example:
+REPLACE INTO table_name
+(visual, inspection_status, inspector_name, gelpak_name, gelpak_location),
+VALUES (3, 'Partially Inspected', 'Me', 'GP1234', 'A01');
+
+
+
+
+// ========== Problem:
+
+REPLACE does work much like an INSERT that just overwrites records that have the same PRIMARY KEY or UNIQUE index, however, beware.
+
+Shlomi Noach writes about the problem with using REPLACE INTO here:
+
+But weak hearted people as myself should be aware of the following: it is a heavyweight solution. It may be just what you were looking for in terms of ease of use, but the fact is that on duplicate keys, a DELETE and INSERT are performed, and this calls for a closer look.
+
+Whenever a row is deleted, all indexes need to be updated, and most importantly the PRIMARY KEY. When a new row is inserted, the same happens. Especially on InnoDB tables (because of their clustered nature), this means much overhead. The restructuring of an index is an expensive operation. Index nodes may need to be merged upon DELETE. Nodes may need to be split due to INSERT. After many REPLACE INTO executions, it is most probable that your index is more fragmented than it would have been, had you used SELECT/UPDATE or INSERT INTO ... ON DUPLICATE KEY
+
+Also, there's the notion of "well, if the row isn't there, we create it. If it's there, it simply get's updated". This is false. The row doesn't just get updated, it is completely removed. The problem is, if there's a PRIMARY KEY on that table, and the REPLACE INTO does not specify a value for the PRIMARY KEY (for example, it's an AUTO_INCREMENT column), the new row gets a different value, and this may not be what you were looking for in terms of behavior.
+
+Many uses of REPLACE INTO have no intention of changing PRIMARY KEY (or other UNIQUE KEY) values. In that case, it's better left alone. On a production system I've seen, changing REPLACE INTO to INSERT INTO ... ON DPLICATE KEY resulted in a ten fold more throughput (measured in queries per second) and a drastic decrease in IO operations and in load average.
+
+In summary, REPLACE INTO may be right for your implementation, but you might find it more appropriate (and less risky) to use INSERT ... ON DUPLICATE KEY UPDATE instead.

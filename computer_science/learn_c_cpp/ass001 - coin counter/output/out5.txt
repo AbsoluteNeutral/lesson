@@ -1,0 +1,8 @@
+Please Enter a value:
+Values Entered:$0.00
+There is 0 dollar coin.
+There is 0 fifty-cent coin.
+There is 0 twenty-cent coin.
+There is 0 ten-cent coin.
+There is 0 five-cent coin.
+There is 0 one-cent coin.

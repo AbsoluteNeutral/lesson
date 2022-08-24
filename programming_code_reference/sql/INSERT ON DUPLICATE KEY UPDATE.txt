@@ -1,0 +1,11 @@
+// ========== SYNTAX:
+INSERT INTO table (column_names)  
+VALUES (data)  
+ON DUPLICATE KEY UPDATE   
+column1 = expression, column2 = expression…;  
+
+
+Example:
+INSERT INTO Student(Stud_ID, Name, Email, City)   
+VALUES (4, 'John', 'john@javatpoint.com', 'New York')  
+ON DUPLICATE KEY UPDATE City = 'California';  
