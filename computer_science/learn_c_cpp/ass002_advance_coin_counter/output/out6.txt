@@ -1,6 +1,9 @@
 Please Enter a value:
-Values Entered:$0.00
-There is 0 dollar coin.
+Values Entered:$1.00
+There is 0 one-thousand dollar note.
+There is 0 one-hundred dollar note.
+There is 0 ten-dollar note.
+There is 1 one-dollar coin.
 There is 0 fifty-cent coin.
 There is 0 twenty-cent coin.
 There is 0 ten-cent coin.

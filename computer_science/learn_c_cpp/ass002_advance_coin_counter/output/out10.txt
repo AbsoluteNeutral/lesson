@@ -1,0 +1,2 @@
+Please Enter a value:
+Wrong input format. Only accept money format e.g. 1.23

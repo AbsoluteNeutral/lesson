@@ -1,0 +1,15 @@
+ass002_advance_coin_counter
+
+- Write a program that input a value and output the number of coins for the following category:
+  - one-thousand dollar note
+  - one-hundred dollar note
+  - ten-dollar note
+	- dollar coin
+	- fifty-cent coin
+	- twenty-cent coin
+	- ten-cent coin
+	- five-cent coin
+	- one-cent coin
+	
+- Use the input.txt from the input folder to get the test.
+- Match the output in the output folder.

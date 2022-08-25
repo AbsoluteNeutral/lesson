@@ -1,4 +1,4 @@
-Handout 001
+ass001_coin_counter
 
 - Write a program that input a value and output the number of coins for the following category:
 	- dollar coin
@@ -10,7 +10,6 @@ Handout 001
 	
 - Use the input.txt from the input folder to test.
 - Match the result from the output folder.
-
 
 --------------------------------------------------
 Example 1: 

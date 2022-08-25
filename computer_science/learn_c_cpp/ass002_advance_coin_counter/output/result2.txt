@@ -1,0 +1,11 @@
+Please Enter a value:
+Values Entered:$3989.00
+There are 3 one-thousand dollar notes.
+There are 9 one-hundred dollar notes.
+There are 8 ten-dollar notes.
+There are 9 one-dollar coins.
+There is 0 fifty-cent coin.
+There is 0 twenty-cent coin.
+There is 0 ten-cent coin.
+There is 0 five-cent coin.
+There is 0 one-cent coin.

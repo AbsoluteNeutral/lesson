@@ -9,7 +9,7 @@ int main(){
 	
 	scanfCount = scanf("%d.%2d", &dollars, &cents);
 	printf("\n");
-	if(scanfCount <= 0)
+	if(scanfCount <= 0 || dollars <= 0)
 	{
 		printf("Wrong input");
 	}
