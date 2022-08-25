@@ -1,0 +1,19 @@
+ass003_discriminant
+----------------------------------------------------------------------------------------------------
+
+Objective:
+----------
+- Write a program that find the discriminant of a quadratic equation.
+
+The program takes in 3 input of the 3 coeffeicient respectively.
+The program will then check the quadractice equation and determinat the roots.
+Lastly, output whether is it:
+1. No real roots OR
+2. One real roots OR
+3. Two real roots
+
+Using the formula b^2-4ac
+  
+----------------------------------------------------------------------------------------------------
+- Use the input.txt from the input folder to get the test.
+- Match the output in the output folder.

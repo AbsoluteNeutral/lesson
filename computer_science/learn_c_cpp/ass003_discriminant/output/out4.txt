@@ -1,0 +1,2 @@
+Enter coeffeicent of x^2:Enter coeffeicent of x:Enter coeffeicent of c:
+The quadratic equation is: -123.457x^2+10.000x+555.000 has two distinct roots.

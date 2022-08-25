@@ -1,0 +1,2 @@
+Enter coeffeicent of x^2:Enter coeffeicent of x:Enter coeffeicent of c:
+The quadratic equation is: 123123.000x^2+3.000x+2.000 has no real root.

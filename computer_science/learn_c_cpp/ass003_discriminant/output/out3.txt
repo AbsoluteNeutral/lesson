@@ -1,0 +1,2 @@
+Enter coeffeicent of x^2:Enter coeffeicent of x:Enter coeffeicent of c:
+The quadratic equation is: -10.000x^2+0.000x+90.700 has two distinct roots.

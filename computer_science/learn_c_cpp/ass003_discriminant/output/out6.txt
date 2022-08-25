@@ -1,0 +1,2 @@
+Enter coeffeicent of x^2:Enter coeffeicent of x:Enter coeffeicent of c:
+The quadratic equation is: -0.333x^2-0.123x+1.233 has two distinct roots.
