@@ -1,10 +1,12 @@
-
-#ifndef _ZG_FIBONACCI_H
-#define _ZG_FIBONACCI_H
+#ifndef FIBONACCI_H_
+#define FIBONACCI_H_
 
 #include <vector>
 
-namespace zg{
+namespace ddd{
+  const int fibsize = 31;
+  const int fibArray[fibsize]
+  
   /* Templated */
   template<unsigned N>
   struct TFibonacci
@@ -30,10 +32,8 @@ namespace zg{
   std::vector<T> GetFibonacciSequence(unsigned N)
   {
     std::vector<T> tmp;
-    //if(startsFrom0_)
     {
-      //starts from 0
-      tmp.reserve(N + 1);
+      tmp.reserve(N + 1);       //starts from 0
       tmp.push_back(0);
       if(N == 0) return tmp;
       tmp.push_back(1);
@@ -49,26 +49,9 @@ namespace zg{
         e = tmp.end();
       }
     }
-    //else 
-    {
-      ////starts from 1
-      //tmp.reserve(N );
-      //tmp.push_back(1);
-      //if(N == 0) return tmp;
-      //tmp.push_back(1);
-      //if(N == 1) return tmp;
-      //
-      //N -= 1;
-      //auto e = tmp.end();
-      //while(N--)
-      //{
-      //  tmp.push_back( *(e-2) + *(e-1) );
-      //  e = tmp.end();
-      //}
-    }
     return tmp;
   }
 
-} //namespace zg
+} // namespace ddd
 
 #endif //_ZG_FIBONACCI_H
