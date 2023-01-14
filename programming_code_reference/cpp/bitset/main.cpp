@@ -1,24 +1,22 @@
-
 #include "bitset.h"
 
-namespace zg{
-
-  void ztest_bitset()
+namespace ddd {
+  void bitset_test0()
   {
-    printf(" ############################## Running ztest_bitset.cpp... ############################## \n\n");
-    Print_BuiltInTypeSize();
+    printf(" ############################## bitset_test0() ############################## \n\n");
+    PrintBuiltInTypeSize();
     printf("\n");
     
     {
-      zg::Bitset<10>  test0{10};
-      zg::Bitset<32>  test1{-10};
-      zg::Bitset<64>  test2{long(-10)};
-      zg::Bitset<64>  test3{-10};
-      zg::Bitset<200> test4{10};
-      zg::Bitset<100> test5{10.0f};
-      zg::Bitset<100> test6{-10.0f};
-      zg::Bitset<100> test7{10.0};
-      zg::Bitset<100> test8{-10.0};
+      ddd::Bitset<10>  test0{10};
+      ddd::Bitset<32>  test1{-10};
+      ddd::Bitset<64>  test2{long(-10)};
+      ddd::Bitset<64>  test3{-10};
+      ddd::Bitset<200> test4{10};
+      ddd::Bitset<100> test5{10.0f};
+      ddd::Bitset<100> test6{-10.0f};
+      ddd::Bitset<100> test7{10.0};
+      ddd::Bitset<100> test8{-10.0};
     
       std::cout << "Bitset test:" << std::endl;
       std::cout << "test0 \n" << test0 << std::endl;
@@ -34,15 +32,15 @@ namespace zg{
     }
     
     {
-      zg::TriBitset<10>  test0{10};
-      zg::TriBitset<32>  test1{-10};
-      zg::TriBitset<64>  test2{long(-10)};
-      zg::TriBitset<64>  test3{-10};
-      zg::TriBitset<200> test4{10};
-      zg::TriBitset<100> test5{10.0f};
-      zg::TriBitset<100> test6{-10.0f};
-      zg::TriBitset<100> test7{10.0};
-      zg::TriBitset<100> test8{-10.0};
+      ddd::TriBitset<10>  test0{10};
+      ddd::TriBitset<32>  test1{-10};
+      ddd::TriBitset<64>  test2{long(-10)};
+      ddd::TriBitset<64>  test3{-10};
+      ddd::TriBitset<200> test4{10};
+      ddd::TriBitset<100> test5{10.0f};
+      ddd::TriBitset<100> test6{-10.0f};
+      ddd::TriBitset<100> test7{10.0};
+      ddd::TriBitset<100> test8{-10.0};
     
       std::cout << "TriBitset test:" << std::endl;
       std::cout << "test0 \n" << test0 << std::endl;
@@ -120,14 +118,12 @@ namespace zg{
     printf("Base 16:      %s\n", ConvertToBase(16, 17).c_str());
     
     printf("\n");
-    printf(" ############################## End ztest_bitset.cpp.. ############################## \n");
+    printf(" ############################## bitset_test0() ############################## \n");
   }
   
 }
 
-#ifndef _RUN_ALL_TEST_
 int main()
 {
-  zg::ztest_bitset();
+  ddd::bitset_test0();
 }
-#endif

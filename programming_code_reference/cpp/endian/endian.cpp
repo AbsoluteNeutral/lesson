@@ -1,8 +1,6 @@
-
-
 #include "endian.h"
 
-namespace zg{
+namespace ddd {
     enum _ENDIAN_BYTE
     {
         BYTE1 = 0x00000000000000FF,   
@@ -78,4 +76,4 @@ namespace zg{
         unsigned long tmp = FlipEndian(*reinterpret_cast<unsigned long *>(&number));
         return *reinterpret_cast<double *>(&tmp); 
     }
-} //namespace zg
+} //namespace ddd

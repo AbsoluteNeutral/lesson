@@ -1,8 +1,7 @@
+#include "color.h"
+#include <math.h>
 
-#include "stdafx.h"
-#include "Color.h"
-
-namespace zg {
+namespace ddd {
 	Color::Color() noexcept
 		:r(1.0f), g(1.0f), b(1.0f), a(1.0f) 
 	{}
@@ -22,11 +21,13 @@ namespace zg {
 	Color::Color(int r_, int g_, int b_, int a_) noexcept
 		: r(r_ * INV_255F), g(g_ * INV_255F), b(b_ * INV_255F), a(a_ * INV_255F)
 	{}
+  
 	//getters
 	int Color::GetR() const { return static_cast<int>(std::roundf(r * 255.0f)); }
 	int Color::GetG() const { return static_cast<int>(std::roundf(g * 255.0f)); }
 	int Color::GetB() const { return static_cast<int>(std::roundf(b * 255.0f)); }
 	int Color::GetA() const { return static_cast<int>(std::roundf(a * 255.0f)); }
+  
 	//setters
 	void Color::Set(int r_, int g_, int b_)
 	{
@@ -88,4 +89,4 @@ namespace zg {
 		};
 	}
 
-} //namespace zg
+} //namespace ddd

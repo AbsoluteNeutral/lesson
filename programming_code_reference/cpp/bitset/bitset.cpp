@@ -1,9 +1,8 @@
-
 #include "bitset.h"
 
-namespace zg{
+namespace ddd {
     //prints sizes of built in types
-    void Print_BuiltInTypeSize()
+    void PrintBuiltInTypeSize()
     {
         printf("bool:               %lu Byte, \n", sizeof(bool));
         printf("char:               %lu Byte, \n", sizeof(char));
@@ -176,4 +175,4 @@ namespace zg{
         return ConvertToHex(*reinterpret_cast<unsigned long *>(&number_));
     }
 
-} //namespace zg
+} //namespace ddd

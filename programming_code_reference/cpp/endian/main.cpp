@@ -1,12 +1,11 @@
-
 #include "endian.h"
 #include "bitset.h"
 
-namespace zg{
+namespace ddd{
   
-  void ztest_endian()
+  void endian_test0()
   {
-    printf(" ############################## Running ztest_endian.cpp... ############################## \n");
+    printf(" ############################## Running endian_test0... ############################## \n");
     printf("Is Little Endian:    %d\n", IsLittleEndian());
     
     {
@@ -82,14 +81,12 @@ namespace zg{
         printf("Big Endian:    %s\n", ConvertToBinary(big).c_str());
     }
     
-    printf(" ############################## End ztest_endian.cpp... ############################## \n");
+    printf(" ############################## End endian_test0 ############################## \n");
   }
   
 }
 
-#ifndef _RUN_ALL_TEST_
 int main()
 {
-  zg::ztest_endian();
+  ddd::endian_test0();
 }
-#endif

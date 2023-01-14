@@ -1,12 +1,10 @@
+#ifndef DDD_ENDIAN_H_
+#define DDD_ENDIAN_H_
 
-#ifndef _ZG_ENDIAN_H_
-#define _ZG_ENDIAN_H_
-
-
-namespace zg
+namespace ddd
 {
     bool IsLittleEndian();
-
+    
     unsigned    FlipEndian  (unsigned number);
     int         FlipEndian  (int number);
     float       FlipEndian  (float number);
@@ -16,4 +14,4 @@ namespace zg
     double          FlipEndian  (double number);
 }
 
-#endif //_ZG_ENDIAN_H_
+#endif //DDD_ENDIAN_H_

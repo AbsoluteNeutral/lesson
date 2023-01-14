@@ -1,12 +1,14 @@
-
-#ifndef _ZG_BITSET_H_
-#define _ZG_BITSET_H_
+#ifndef DDD_BITSET_H_
+#define DDD_BITSET_H_
 
 #include <stdio.h>
 #include <string>
+#include <iostream>
 
-namespace zg
+namespace ddd
 {
+    void PrintBuiltInTypeSize();
+    
     //an static arry to grab hex value
     static const char HexChar[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
@@ -14,7 +16,6 @@ namespace zg
     template<unsigned N>
     class Bitset
     {
-
     public:
     	template<typename T>
     	Bitset(T number_)
@@ -93,7 +94,7 @@ namespace zg
         	tmpO[NumberOfOct] = '\0';
         	octstring = tmpO;
 
-        	//Hex
+        //Hex
     		int NumberOfHex = (N >> 2) + ((N % 4) ? 1 : 0); //round up
     		int getminHex = 16 <= NumberOfHex ? 16 : NumberOfHex;
     		char tmpH[NumberOfHex + 1];
@@ -190,4 +191,4 @@ namespace zg
     std::string ConvertToBase(unsigned base, double number);        //not needed
 }
 
-#endif //_ZG_BITSET_H_
+#endif //DDD_BITSET_H_

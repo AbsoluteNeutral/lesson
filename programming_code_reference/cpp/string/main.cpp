@@ -1,43 +1,41 @@
-
+#include<iostream>
+#include<utility>
 #include "string.h"
-#include <string>
 
-int main()
-{
-  zg::string a{"asada"};
-	
-	std::cout << a << std::endl;
-	a = "abcdefghijkl";
-  std::cout << "string     :" << a << std::endl;
-  std::cout << "string size:" << a.size() << std::endl;
-  std::cout << "string leng:" << a.length() << std::endl;
-	
-	
-	try
-	{
-		std::cout << "string at 1:" << a.at(1) << std::endl;
-		//std::cout << a.at(-1) << std::endl;
-		//std::cout << a.at(8) << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-		throw;
-	}
-	//a.clear();
-	try
-	{
-		std::cout << "string fron:" << a.front() << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-		throw;
-	}
-	std::cout << "string back:" << a.back() << std::endl;
-	
-	const zg::string b{"abcdefgh"};
-	std::cout << "consts fron:" << b.front() << std::endl;
-	std::cout << "consts back:" << b.back() << std::endl;
-	
+int main(){
+  ddd::string str1{"ABC"};
+  ddd::string str2{"DEF"};
+  ddd::string str3{str1};
+  
+  std::cout << "ctor:" << str1 << std::endl;
+  std::cout << "cpyctor:" << str3 << std::endl;
+  
+  ddd::string str4{std::move(str3)};
+  std::cout << "mctor:" << str3 << std::endl;
+  std::cout << "mctor:" << str4 << std::endl;
+  
+  str3 = str1;
+  std::cout << "=:" << str3 << std::endl;
+  str3 += str2;
+  std::cout << "+=:" << str3 << std::endl;
+  str3.push_back('1');
+  std::cout << "push_back:" << str3 << std::endl;
+  std::cout << "size:" << str3.size() << std::endl;
+  std::cout << "length:" << str3.length() << std::endl;
+  
+  std::cout << "[0][1]:" << str3[0] << str3[1] << std::endl;
+  std::cout << "at2:" << str3.at(2) << std::endl;
+  std::cout << "front:" << str3.front() << std::endl;
+  std::cout << "back:" << str3.back() << std::endl;
+
+  str3.clear();
+  std::cout << "clear:" << str3 << std::endl;
+  str3.append(str1, 1, 1);
+  std::cout << "append:" << str3 << std::endl;
+  str3.append(str2, 0, 3);
+  std::cout << "append:" << str3 << std::endl;
+  std::cout << "size:" << str3.size() << std::endl;
+
+  
+  return 0;
 }
