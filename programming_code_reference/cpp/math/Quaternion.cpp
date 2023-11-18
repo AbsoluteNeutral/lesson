@@ -1,28 +1,28 @@
-/*****************************************************************************/
-/*!
-\file			Quaternion.cpp
-\brief			Quaternion Implmentation
-*/
-/*****************************************************************************/
-#include "stdafx.h"
+
 #include <stdio.h>
+#include "Reals.h"
+#include "Matrix33.h"
+#include "Matrix44.h"
 #include "Quaternion.h"
 
-namespace zg {
-
+namespace ddd {
+	// ---------- static
+	Quaternion Quaternion::Identity{};
+	
+	// ---------- constructor
 	Quaternion::Quaternion() noexcept
-		:x(0.0f), y(0.0f), z(0.0f), w(1.0f)
+		:x(0), y(0), z(0), w(float(1))
 	{}
 	Quaternion::Quaternion(const Vector3& topurequaternion_) noexcept
-		:x(topurequaternion_.x), y(topurequaternion_.y), z(topurequaternion_.z), w(0.0f)
+		:x(topurequaternion_.x), y(topurequaternion_.y), z(topurequaternion_.z), w(0)
 	{}
 	Quaternion::Quaternion(float x_, float y_, float z_, float w_) noexcept
 		: x(x_), y(y_), z(z_), w(w_)
 	{}
 	Quaternion::Quaternion(const Vector3& axis_, float degree_) noexcept
-		:x(0.0f), y(0.0f), z(0.0f), w(1.0f)
+		:x(0), y(0), z(0), w(float(1))
 	{
-		float rad = TO_RAD(degree_) * 0.5f;
+		float rad = TO_RAD(degree_) * float(0.5);
 		float s = std::sin(rad);
 		x = axis_.x * s;
 		y = axis_.y * s;
@@ -30,32 +30,24 @@ namespace zg {
 		w = std::cos(rad);
 	}
 	
-	// ____________________________________________________________ setters
+	// ---------- setters
 	void Quaternion::AddScaledVector(const Vector3& vector_, float f_) {
-		Quaternion q(vector_.x * f_, vector_.y * f_, vector_.z * f_, 0.0f);
+		Quaternion q(vector_.x * f_, vector_.y * f_, vector_.z * f_, 0);
 		q *= *this;
 		x += q.x * 0.5f;
 		y += q.y * 0.5f;
 		z += q.z * 0.5f;
 		w += q.w * 0.5f;
 	}
-	
 	void Quaternion::Conjugate(){
 		x = -x;	y = -y;	z = -z;
 	}
-
 	void Quaternion::Integrate(const Vector3& vector_, float f_) {
 		AddScaledVector(vector_, f_);
-		//Quaternion q(vector_.x * f_, vector_.y * f_, vector_.z * f_, 0.0f);
-		//q *= *this;
-		//x += q.x * 0.5f;
-		//y += q.y * 0.5f;
-		//z += q.z * 0.5f;
-		//w += q.w * 0.5f;
 	}
 	void Quaternion::Invert() {
 		float lengthSq = LengthSq();
-		//ErrorIf(lengthSq <= EPSILON, "Quaternion - Division by zero.");
+		// ErrorIf(lengthSq <= EPSILON, "Quaternion - Division by zero.");
 		lengthSq = 1.0f / lengthSq;
 		x = -x * lengthSq;
 		y = -y * lengthSq;
@@ -65,7 +57,7 @@ namespace zg {
 	
 	float Quaternion::Normalize() {
 		float len = LengthSq();
-		if (len == 0.0f) {
+		if (len <= 0.0f) {
 			x = y = z = 0.0f;
 			w = 1.0f;
 			return 0.0f;
@@ -75,7 +67,6 @@ namespace zg {
 		z *= len; w *= len;
 		return len;
 	}
-	
 	void Quaternion::Set(float x_, float y_, float z_, float w_) {
 		x = x_;	y = y_;	z = z_;	w = w_;
 	}
@@ -112,7 +103,8 @@ namespace zg {
 		x = y = z = 0.0f;
 		w = 1.0f;
 	}
-	// ____________________________________________________________ getters 
+	
+	// ---------- getters 
 	float Quaternion::Dot(const Quaternion& q_) const {
 		return x * q_.x + y * q_.y + z * q_.z + w * q_.w;
 	}
@@ -164,7 +156,7 @@ namespace zg {
 	
 	Quaternion Quaternion::GetInverted() const {
 		float lengthSq = LengthSq();
-		//ErrorIf(lengthSq <= EPSILON, "Quaternion - Division by zero.");
+		// ErrorIf(lengthSq <= EPSILON, "Quaternion - Division by zero.");
 		lengthSq = 1.0f / lengthSq;
 		return Quaternion(-x * lengthSq, -y * lengthSq, -z * lengthSq, w * lengthSq);
 	}
@@ -248,14 +240,13 @@ namespace zg {
 	{
 		return (x != x) || (y != y) || (z != z) || (w != w);
 	}
+	
 	bool Quaternion::IsNearNan() const
 	{
 		return (NEARZERO(x) && NEARZERO(y) && NEARZERO(z) && NEARZERO(w));
 	}
-	// ____________________________________________________________ static
-	Quaternion Quaternion::Identity{};
 
-	// ____________________________________________________________ operator
+	// ---------- operator
 	bool Quaternion::operator==(const Quaternion& q2_) const { return ((x == q2_.x) && (y == q2_.y) && (z == q2_.z) && (w == q2_.w)); }
 
 	Quaternion& Quaternion::operator-=(const Quaternion& q2_){ x -= q2_.x;	y -= q2_.y;	z -= q2_.z;	w -= q2_.w;	return *this; }
@@ -281,8 +272,9 @@ namespace zg {
 		//}
 		return *this;
 	}
+	
 	Quaternion& Quaternion::operator/=(float f_) {
-		ErrorIf(f_ <= EPSILON, "Quaternion - Division by zero.");
+		// ErrorIf(f_ <= EPSILON, "Quaternion - Division by zero.");
 		float reciprocal = 1.0f / f_;
 		x *= reciprocal;
 		y *= reciprocal;
@@ -291,92 +283,6 @@ namespace zg {
 		return *this;
 	}
 
-	#ifdef USING_SOL2
-	Quaternion Quaternion::operator-()						const	{ return Quaternion{ -x, -y, -z, w }; }
-	Quaternion Quaternion::operator-(const Quaternion& q2_) const	{ return Quaternion{ x - q2_.x,	y - q2_.y,	z - q2_.z,	w - q2_.w }; }
-	Quaternion Quaternion::operator+(const Quaternion& q2_) const	{ return Quaternion{ x + q2_.x,	y + q2_.y,	z + q2_.z,	w + q2_.w }; }
-	Quaternion Quaternion::operator*(float f)			    const	{ return Quaternion{ x * f,		y * f,		z * f,		w * f	  }; }
-	Vector3 Quaternion::operator*(const Vector3& q2_)	const {
-		const float prodX = w * q2_.x + y * q2_.z - z * q2_.y;
-	    const float prodY = w * q2_.y + z * q2_.x - x * q2_.z;
-	    const float prodZ = w * q2_.z + x * q2_.y - y * q2_.x;
-	    const float prodW = -x * q2_.x - y * q2_.y - z * q2_.z;
-	    return Vector3(w * prodX - prodY * z + prodZ * y - prodW * x,
-	                   w * prodY - prodZ * x + prodX * z - prodW * y,
-	                   w * prodZ - prodX * y + prodY * x - prodW * z);
-	}
-	Quaternion Quaternion::operator*(const Quaternion& q2_) const {
-		return Quaternion{
-			w * q2_.x + x * q2_.w + y * q2_.z - z * q2_.y,
-			w * q2_.y + y * q2_.w + z * q2_.x - x * q2_.z,
-			w * q2_.z + z * q2_.w + x * q2_.y - y * q2_.x,
-			w * q2_.w - x * q2_.x - y * q2_.y - z * q2_.z
-		};
-	}
-	Quaternion Quaternion::operator/(float q2_) const {
-		ErrorIf(q2_ <= EPSILON, "Quaternion - Division by zero.");
-		float reciprocal = 1.0f / q2_;
-		return Quaternion{
-			x * reciprocal,
-			y * reciprocal,
-			z * reciprocal,
-			w * reciprocal
-		};
-	}
-	void Quaternion::BindLua(sol::state & lua)
-	{
-		lua.new_usertype<Quaternion>("Quaternion",
-			sol::constructors<
-			Quaternion(),
-			Quaternion(float, float, float, float),
-			Quaternion(const Vector3&, float)>(),
-	
-			"x", &Quaternion::x,
-			"y", &Quaternion::y,
-			"z", &Quaternion::z,
-			"w", &Quaternion::w,
-	
-			"SetToZero", &Quaternion::SetToZero,
-			"Normalize", &Quaternion::Normalize,
-			"Normalized", &Quaternion::Normalized,
-			"Dot", &Quaternion::Dot,
-			"LengthSq", &Quaternion::LengthSq,
-			"Length", &Quaternion::Length,
-			"Conjugate", &Quaternion::Conjugate,
-			"GetConjugated", &Quaternion::GetConjugated,
-			"Invert", &Quaternion::Invert,
-			"GetInverted", &Quaternion::GetInverted,
-			"GetExponent", &Quaternion::GetExponent,
-			"GetAxis", &Quaternion::GetAxis,
-	
-			"EulerToQ", sol::overload(
-				static_cast<void (Quaternion::*)(float, float, float)>(&Quaternion::ToQuaternion),
-				static_cast<void (Quaternion::*)(const Vector3&)>(&Quaternion::ToQuaternion)),
-	
-			"Degree", &Quaternion::Degree,
-			"GetRotatedVector", &Quaternion::GetRotatedVector,
-			"Integrate", &Quaternion::Integrate,
-			"AddScaledVector", &Quaternion::AddScaledVector,
-			sol::meta_function::addition, &Quaternion::operator+,
-			sol::meta_function::subtraction, 
-	      static_cast<Quaternion(Quaternion::*)(const Quaternion&) const>(&Quaternion::operator-),
-			sol::meta_function::multiplication, sol::overload(
-				static_cast<Quaternion(Quaternion::*)(float) const>(&Quaternion::operator*),
-				static_cast<Quaternion(Quaternion::*)(const Quaternion&) const>(&Quaternion::operator*)
-	
-			),
-			sol::meta_function::division, &Quaternion::operator/,
-	    sol::meta_function::unary_minus, 
-	      static_cast<Quaternion(Quaternion::*)()const>(&Quaternion::operator-)
-			);
-	
-	
-		lua["Quaternion_Identity"] = Identity;
-		lua["Quaternion_Slerp"] = Slerp;
-		lua["Quaternion_FromToRotation"] = FromToRotation;
-		lua["Quaternion_LookRotation"] = LookRotation;
-	}
-	#else
 	Quaternion operator-(const Quaternion& q1_)						   { return Quaternion{ -q1_.x, -q1_.y, -q1_.z, q1_.w }; }
 	Quaternion operator-(const Quaternion& q1_, const Quaternion& q2_) { return Quaternion{ q1_.x - q2_.x,	q1_.y - q2_.y,	q1_.z - q2_.z,	q1_.w - q2_.w }; }
 	Quaternion operator+(const Quaternion& q1_, const Quaternion& q2_) { return Quaternion{ q1_.x + q2_.x,	q1_.y + q2_.y,	q1_.z + q2_.z,	q1_.w + q2_.w }; }
@@ -423,8 +329,7 @@ namespace zg {
 			q1_.w * reciprocal
 		};
 	}
-	#endif
-	
+
 	std::ostream& operator<<(std::ostream& os, const Quaternion& q_) {
 		printf("{ %.6f %.6f %.6f %.6f }\n", q_.x, q_.y, q_.z, q_.w);
 		//os << "{" << v.x << "," << v.y << "," << v.z << "," << v.w << "}\n";
@@ -449,14 +354,12 @@ namespace zg {
 		return q;
 	}
 
-
-
 	Quaternion FromToRotation(const Vector3& fromVector, const Vector3& toVector) {
 		float dot = fromVector.Dot(toVector);
 		float k = sqrt(fromVector.LengthSq() * toVector.LengthSq());
 		if (fabs(dot / k + 1) < EPSILON)
 		{
-			Vector3 ortho = zg::Orthogonal(fromVector);
+			Vector3 ortho = ddd::Orthogonal(fromVector);
 			return Quaternion(ortho.Normalized(), 0);
 		}
 		Vector3 cross = fromVector.Cross(toVector);
@@ -464,7 +367,7 @@ namespace zg {
 	}
 
 	Quaternion LookRotation(const Vector3& forward, const Vector3& up, const Vector3& front) {
-		UNREFERENCED_PARAMETER(front);
+		// UNREFERENCED_PARAMETER(front);
 		Vector3 vector = forward.Normalized();
 		Vector3 vector2 = Cross(up, vector);
 		Vector3 vector3 = Cross(vector, vector2);
@@ -674,4 +577,4 @@ namespace zg {
 		return q;
 	}
 
-} //namespace zg
+} //namespace ddd

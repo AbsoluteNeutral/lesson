@@ -1,14 +1,14 @@
 
-#include "stdafx.h"
 #include "Matrix33.h"
 
-namespace zg {
-	//static
+namespace ddd {
+// ---------- static
 	const Matrix33	Matrix33::Identity = Matrix33{	1.0f, 0.0f, 0.0f,
 													0.0f, 1.0f, 0.0f,
 													0.0f, 0.0f, 1.0f };
 	const Matrix33	Matrix33::Zero{};
 
+// ---------- ctor  
 	Matrix33::Matrix33() noexcept
 		: m{ 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f }
 	{}
@@ -26,7 +26,7 @@ namespace zg {
 #endif
 	{}
 
-	//setters
+// ----------setters
 	void Matrix33::Set(float _00, float _01, float _02,
 					   float _10, float _11, float _12,
 					   float _20, float _21, float _22) 
@@ -94,13 +94,13 @@ namespace zg {
 		}
 	}
 
-	//getters
+// ---------- getters
 	Matrix33 Matrix33::GetAbsouleMatrix() const
 	{
 		return Matrix33{
-			fabs(md[0][0]), 	fabs(md[0][1]),	 fabs(md[0][2]),
-			fabs(md[1][0]), 	fabs(md[1][1]),	 fabs(md[1][2]),
-			fabs(md[2][0]), 	fabs(md[2][1]),	 fabs(md[2][2])
+			std::fabs(md[0][0]), std::fabs(md[0][1]), std::fabs(md[0][2]),
+			std::fabs(md[1][0]), std::fabs(md[1][1]), std::fabs(md[1][2]),
+			std::fabs(md[2][0]), std::fabs(md[2][1]), std::fabs(md[2][2])
 		};
 	}
 	float Matrix33::GetDeterminant() const 
@@ -155,7 +155,7 @@ namespace zg {
 #endif
 	}
 
-	//operator
+// ----------operator
 	Matrix33::operator float*() { return m; }
 	Matrix33& Matrix33::operator*=(float f_) {
 		float* b = m;
@@ -204,7 +204,7 @@ namespace zg {
 		return *this;
 	}
 
-	
+// ---------- friend
 	Matrix33 operator*(const Matrix33& lhs, const Matrix33& rhs) {
 #ifdef ROW_MAJOR
 		return Matrix33{
@@ -275,7 +275,7 @@ namespace zg {
 	}
 
 
-	//extern function
+// ---------- extern
 	void BuildScale(Matrix33& matrix_, float x_, float y_) {
 		//matrix.md[0][0] = x; matrix.md[1][1] = y;
 		matrix_ = Matrix33{ x_,		0.0f,	0.0f,
@@ -302,8 +302,8 @@ namespace zg {
 
 	void BuildTRS(Matrix33& matrix_, const Vector3& translation_, const Vector3& scale_, float degree_angleZ_) {
 		float r = TO_RAD(degree_angleZ_);
-		float c = std::cosf(r);
-		float s = std::sinf(r);
+		float c = std::cos(r);
+		float s = std::sin(r);
 		matrix_ = Matrix33{ scale_.x * c, scale_.y * -s, translation_.x,
 							scale_.x * s, scale_.y * c,  translation_.y,
 							0.0f,		  0.0f,			1.0f };
@@ -424,4 +424,4 @@ namespace zg {
 	Vector2	TransformPoint	(const Matrix33& matrix_, const Vector2& vector_) {	return Vector2{ matrix_ * Vector3{ vector_, 1.0f } };	}
 	Vector2	TransformVector	(const Matrix33& matrix_, const Vector2& vector_) {	return Vector2{ matrix_ * Vector3{ vector_, 0.0f } };	}
 
-}//namespace zg
+} // namespace ddd

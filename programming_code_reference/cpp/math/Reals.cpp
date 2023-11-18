@@ -1,54 +1,57 @@
-#include "Reals.h"
 
-namespace zg {
+#include "reals.h"
+
+namespace ddd {
+
+
 	float ToRad(float value) { return value * PI180; }
 	float ToDeg(float value) { return value * INV_PI180; }
 
 	//float
 	//Trigonometric
-	float sin	(float x)			{ return std::sinf(x);		}
-	float cos	(float x)			{ return std::cosf(x);		}
-	float tan	(float x)			{ return std::tanf(x);		}
-	float asin	(float x)			{ return std::asinf(x);		}
-	float acos	(float x)			{ return std::acosf(x);		}
-	float atan	(float x)			{ return std::atanf(x);		}
-	float atan2	(float y, float x)	{ return std::atan2f(y, x); }
+// float sin	(float x)			{ return std::sinf(x);		}
+// float cos	(float x)			{ return std::cosf(x);		}
+// float tan	(float x)			{ return std::tanf(x);		}
+// float asin	(float x)			{ return std::asinf(x);		}
+// float acos	(float x)			{ return std::acosf(x);		}
+// float atan	(float x)			{ return std::atanf(x);		}
+// float atan2	(float y, float x)	{ return std::atan2f(y, x); }
+// 
+// //Hyperbolic 
+// float sinh	(float x) {	return std::sinh(x);	}
+// float cosh	(float x) {	return std::cosh(x);	}
+// float tanh	(float x) {	return std::tanh(x);	}
+// float asinh	(float x) {	return std::asinh(x);	}
+// float acosh	(float x) {	return std::acosh(x);	}
+// float atanh	(float x) {	return std::atanh(x);	}
+// 
+// //Power
+// float pow	(float x, float exp)	{ return std::powf(x, exp); }
+// float sqrt	(float x)				{ return std::sqrtf(x); }
+// 
+// //double
+// //Exponential and logarithmic
+// double sin	(double x)			 { return std::sin(x);		}
+// double cos	(double x)			 { return std::cos(x);		}
+// double tan	(double x)			 { return std::tan(x);		}
+// double asin	(double x)			 { return std::asin(x);		}
+// double acos	(double x)			 { return std::acos(x);		}
+// double atan	(double x)			 { return std::atan(x);		}
+// double atan2(double y, double x) { return std::atan2(y, x); }
+// 
+// //Hyperbolic 
+// double sinh	(double x) { return std::sinh(x);	}
+// double cosh	(double x) { return std::cosh(x);	}
+// double tanh	(double x) { return std::tanh(x);	}
+// double asinh(double x) { return std::asinh(x);	}
+// double acosh(double x) { return std::acosh(x);	}
+// double atanh(double x) { return std::atanh(x);	}
+// 
+// //Power
+// double pow	(double x, double exp)	{ return std::pow(x, exp); }
+// double sqrt	(double x)				{ return std::sqrt(x); }
 
-	//Hyperbolic 
-	float sinh	(float x) {	return std::sinh(x);	}
-	float cosh	(float x) {	return std::cosh(x);	}
-	float tanh	(float x) {	return std::tanh(x);	}
-	float asinh	(float x) {	return std::asinh(x);	}
-	float acosh	(float x) {	return std::acosh(x);	}
-	float atanh	(float x) {	return std::atanh(x);	}
-
-	//Power
-	float pow	(float x, float exp)	{ return std::powf(x, exp); }
-	float sqrt	(float x)				{ return std::sqrtf(x); }
-
-	//double
-	//Exponential and logarithmic
-	double sin	(double x)			 { return std::sin(x);		}
-	double cos	(double x)			 { return std::cos(x);		}
-	double tan	(double x)			 { return std::tan(x);		}
-	double asin	(double x)			 { return std::asin(x);		}
-	double acos	(double x)			 { return std::acos(x);		}
-	double atan	(double x)			 { return std::atan(x);		}
-	double atan2(double y, double x) { return std::atan2(y, x); }
-
-	//Hyperbolic 
-	double sinh	(double x) { return std::sinh(x);	}
-	double cosh	(double x) { return std::cosh(x);	}
-	double tanh	(double x) { return std::tanh(x);	}
-	double asinh(double x) { return std::asinh(x);	}
-	double acosh(double x) { return std::acosh(x);	}
-	double atanh(double x) { return std::atanh(x);	}
-
-	//Power
-	double pow	(double x, double exp)	{ return std::pow(x, exp); }
-	double sqrt	(double x)				{ return std::sqrt(x); }
-
-#pragma region __________________________________________________ExtraExternal	
+#pragma region ExtraExternal_	
 	float Absolute(float val)	{ return val < 0.0f ? -val : val;	}
 	double Absolute(double val)	{ return val < 0.0 ? -val : val;		}
 
@@ -92,8 +95,8 @@ namespace zg {
 		max += 1;
 		return rand() % (max - min) + min;
 	}
-	//http://www.rgba.org/articles/sfrand/sfrand.htm
-	//Generates between -1 to 1
+	// http://www.rgba.org/articles/sfrand/sfrand.htm
+	// Generates between -1 to 1
 	static unsigned int mirand = 1;
 	float sfrand() {
 		unsigned int a;
@@ -169,7 +172,7 @@ namespace zg {
 		float num4 = current - target;
 		float num5 = target;
 		float num6 = maxSpeed * smoothTime;
-		num4 = zg::Clamp(num4, -num6, num6);
+		num4 = ddd::Clamp(num4, -num6, num6);
 		target = current - num4;
 		float num7 = (currentVelocity + num * num4) * deltaTime;
 		currentVelocity = (currentVelocity - num * num7) * num3;
@@ -183,6 +186,6 @@ namespace zg {
 	}
 
 
-#pragma endregion
+#pragma endregion // ExtraExternal_
 
-}//namespace zg
+}//namespace ddd

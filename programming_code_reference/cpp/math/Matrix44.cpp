@@ -1,9 +1,8 @@
 
-#include "stdafx.h"
 #include "Matrix44.h"
 
-namespace zg {
-	//static
+namespace ddd {
+// ---------- static
 	const Matrix44 Matrix44::Identity {
 		1.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f, 0.0f,
@@ -12,6 +11,7 @@ namespace zg {
 	};
 	const Matrix44 Matrix44::Zero{};
 	
+// ---------- ctor
 	Matrix44::Matrix44() noexcept
 		:m{ 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f }
 	{}
@@ -32,7 +32,7 @@ namespace zg {
 	#endif
 	{}
 	
-	//setters
+// ---------- setters
 	void Matrix44::SetIdentity() {
 		int M = 4;
 		float *b = *md;			/*begin of matrix*/
@@ -90,7 +90,7 @@ namespace zg {
 		}
 	}
 
-	//getters
+// ---------- getters
 	float* Matrix44::GetPtr() { return m; }
 	Vector4 Matrix44::GetCol(unsigned index_) const {
 #ifdef ROW_MAJOR
@@ -132,7 +132,11 @@ namespace zg {
 #endif
 	}
 
-	//operators
+
+
+
+
+// ---------- operator
 	Matrix44::operator float*() { return m; }
 	Matrix44& Matrix44::operator*=(float f_) {
 		float* b = m;
@@ -185,6 +189,11 @@ namespace zg {
 		return *this;
 	}
 	
+	
+	
+	
+	
+// ---------- friend
 	Matrix44 operator-(const Matrix44& lhs, const Matrix44 &rhs) {
 		Matrix44 tmp{ lhs };
 		return tmp.operator-=(rhs);
@@ -279,7 +288,11 @@ namespace zg {
 		return os;
 	}
 
-	//extern function
+
+
+
+
+// ---------- extern
 	Matrix44 BuildTranslate4x4(float x_, float y_, float z_) {
 		return Matrix44{ 1.0f, 0.0f, 0.0f, x_,
 						 0.0f, 1.0f, 0.0f, y_,
@@ -323,8 +336,8 @@ namespace zg {
 		|RxRz(1-cos0) + Ry(sin0) RyRz(1-cos0) - Rx(sin0) cos0 + RzRz(1-cos0)     0|
 		|0						 0						 0						 1|
 		*/
-		float c = std::cosf(degree_);				//calculate once
-		float s = std::sinf(degree_);				//calculate once
+		float c = std::cos(degree_);				//calculate once
+		float s = std::sin(degree_);				//calculate once
 
 		Vector3 axis{ Normalized(axis_) };		//normalize the axis
 		Vector3 paral{ (1 - c) * axis };		//pre-calculate (1-cos) * axis
@@ -396,7 +409,8 @@ namespace zg {
 	}
 
 #pragma region Build TRS
-	void BuildTRS(Matrix44& m, const Vector3& trans, const Vector3& scale, float angleZ_) {
+	void BuildTRS(Matrix44& m, const Vector3& trans, const Vector3& scale, float angleZ_) 
+	{
 		float c = std::cos(angleZ_);
 		float s = std::sin(angleZ_);
 #ifdef ROW_MAJOR
@@ -419,17 +433,20 @@ namespace zg {
 		m.m[14] = trans.z;
 #endif
 	}
-	void BuildTRS(Matrix44& m, const Vector3& translation_, const Vector3& scale_, const Vector3& angle_) {
+	void BuildTRS(Matrix44& m, const Vector3& translation_, const Vector3& scale_, const Vector3& angle_) 
+	{
 		m = BuildTranslate4x4(translation_)
 			* BuildRotation4x4(angle_.x, { 1.0f, 0.0f, 0.0f })
 			* BuildRotation4x4(angle_.y, { 0.0f, 1.0f, 0.0f })
 			* BuildRotation4x4(angle_.z, { 0.0f, 0.0f, 1.0f }) * BuildScale4x4(scale_);
 	}
-	void BuildTRS(Matrix44& m, const Vector3& translation_, const Vector3& scale_, const Vector3& axis_, float angle_) {
+	void BuildTRS(Matrix44& m, const Vector3& translation_, const Vector3& scale_, const Vector3& axis_, float angle_) 
+	{
 		m = BuildTranslate4x4(translation_) * BuildRotation4x4(angle_, axis_) * BuildScale4x4(scale_);
 	}
 
-	Matrix44 BuildTRS4x4(const Vector3& translation_, const Quaternion& quaternion_, const Vector3& scale_) {
+	Matrix44 BuildTRS4x4(const Vector3& translation_, const Quaternion& quaternion_, const Vector3& scale_) 
+	{
 		//return  BuildTranslate4x4(translation_) * BuildRotation4x4(quaternion_) * BuildScale4x4(scale_);
 		float nQ = quaternion_.x * quaternion_.x + quaternion_.y * quaternion_.y + quaternion_.z * quaternion_.z + quaternion_.w * quaternion_.w;
 		float s = nQ > 0.0f ? 2.0f / nQ : 0.0f;
@@ -464,8 +481,9 @@ namespace zg {
 		};
 	}
 
-	//ETC
-	Matrix44 LookAtRH(const Vector3& eye, const Vector3& target, const Vector3& up) {
+// ---------- ETC
+	Matrix44 LookAtRH(const Vector3& eye, const Vector3& target, const Vector3& up) 
+	{
 		//eye = position
 		//center = target
 		//up = camera up vector
@@ -484,7 +502,8 @@ namespace zg {
 		//				   -Dot(xaxis, eye),  -Dot(yaxis, eye), -Dot(zaxis, eye), 1.0f };
 	}
 
-	Matrix44 LookAtRHDir(const Vector3& eye, const Vector3& direction, const Vector3& up) {
+	Matrix44 LookAtRHDir(const Vector3& eye, const Vector3& direction, const Vector3& up) 
+	{
 		//eye = position
 		//center = target
 		//up = camera up vector
@@ -503,8 +522,8 @@ namespace zg {
 		//				   -Dot(xaxis, eye),  -Dot(yaxis, eye), -Dot(zaxis, eye), 1.0f };
 	}
 
-	Matrix44 LookAtLH(const Vector3& eye, const Vector3& target, const Vector3& up) {
-
+	Matrix44 LookAtLH(const Vector3& eye, const Vector3& target, const Vector3& up) 
+	{
 		//eye = position
 		//center = target
 		//up = camera up vector
@@ -522,8 +541,8 @@ namespace zg {
 		//				   xaxis.z, yaxis.z,  zaxis.z, 0.0f,
 		//				   -Dot(xaxis, eye),  -Dot(yaxis, eye), -Dot(zaxis, eye), 1.0f };
 	}
-	Matrix44 OrthRH(float left, float right, float bottom, float top, float near_, float far_) {
-
+	Matrix44 OrthRH(float left, float right, float bottom, float top, float near_, float far_) 
+	{
 		return Matrix44{
 			2.0f / (right - left),	0.0f,					0.0f,					-(right + left) / (right - left),
 			0.0f,					2.0f / (top - bottom),	0.0f,					-(top + bottom) / (top - bottom),
@@ -538,7 +557,8 @@ namespace zg {
 		//	-(right + left) / (right - left),	-(top + bottom) / (top - bottom),	-(far_ + near_) / (far_ - near_),	1.0f
 		//};
 	}
-	Matrix44 Orth(float left, float right, float bottom, float top) {
+	Matrix44 Orth(float left, float right, float bottom, float top) 
+	{
 		return Matrix44{
 			2.0f / (right - left),	0.0f,					0.0f,	-(right + left) / (right - left),
 			0.0f,					2.0f / (top - bottom),	0.0f,	-(top + bottom) / (top - bottom),
@@ -547,7 +567,8 @@ namespace zg {
 		};
 	}
 
-	Matrix44 PerspectiveRH(float fovRAD_, float aspect_, float near_, float far_) {
+	Matrix44 PerspectiveRH(float fovRAD_, float aspect_, float near_, float far_) 
+	{
 		const float tanHalfFovy = std::tan(fovRAD_ * 0.5f);
 		const float fn = far_ - near_;
 		return Matrix44{
@@ -558,7 +579,8 @@ namespace zg {
 		};
 	}
 
-	Matrix44	FrustumRH(float left_, float right_, float bottom_, float top_, float near_, float far_) {
+	Matrix44	FrustumRH(float left_, float right_, float bottom_, float top_, float near_, float far_) 
+	{
 		return Matrix44{
 			(2.0f * near_) / (right_ - left_),	0.0f,								(right_ + left_) / (right_ - left_),	0.0f,
 			0.0f,								(2.0f * near_) / (top_ - bottom_),	(top_ + bottom_) / (top_ - bottom_),	0.0f,
@@ -567,7 +589,8 @@ namespace zg {
 		};
 	}
 
-	Matrix44 ViewPortTransform(int width_, int height_) {
+	Matrix44 ViewPortTransform(int width_, int height_) 
+	{
 		float w = width_ * 0.5f;
 		float h = height_ * 0.5f;
 		return Matrix44{
@@ -578,7 +601,8 @@ namespace zg {
 		};
 	}
 
-	float Determinant(const Matrix44& matrix_, int dimension_) {
+	float Determinant(const Matrix44& matrix_, int dimension_) 
+	{
 		if (dimension_ == 2) {
 			if (matrix_.m[0] && matrix_.m[1])
 				return matrix_.md[0][0] * matrix_.md[1][1] - matrix_.md[0][1] * matrix_.md[1][0];
@@ -610,7 +634,8 @@ namespace zg {
 		}
 	}
 
-	Matrix44 GaussJordanInverse(const Matrix44& matrix_) {
+	Matrix44 GaussJordanInverse(const Matrix44& matrix_) 
+	{
 		Vector4 idn[4]{ { 1.0f, 0.0f, 0.0f, 0.0f },
 		{ 0.0f, 1.0f, 0.0f, 0.0f },
 		{ 0.0f, 0.0f, 1.0f, 0.0f },
@@ -670,7 +695,8 @@ namespace zg {
 #endif
 	}
 
-	Quaternion GetRotation(const Matrix44& matrix_) {
+	Quaternion GetRotation(const Matrix44& matrix_)
+	{
 		Matrix44 matrix = matrix_;
 		Vector3 scale = 1.0f / GetScale(matrix_);
 
@@ -1024,4 +1050,4 @@ namespace zg {
 	}
 #pragma endregion
 
-}//namespace zg
+} // namespace ddd

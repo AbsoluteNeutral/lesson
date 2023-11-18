@@ -1,18 +1,16 @@
-#include "stdafx.h"
+
 #include "MatrixMN.h"
 
-namespace zg {
-
+namespace ddd {
+	
+// ---------- ctor
 	MatrixMN::MatrixMN() noexcept
 		: matrix{}
 		, numOfRow(0)
 		, numOfCol(0)
 	{}
 	MatrixMN::MatrixMN(size_t row_, size_t col_) noexcept
-		: matrix{}
-		, numOfRow(row_)
-		, numOfCol(col_)
-
+		: matrix{}, numOfRow(row_), numOfCol(col_)
 	{
 		//matrix = new float*;
 		//matrix = new float*[row_];
@@ -36,9 +34,7 @@ namespace zg {
 		}
 	}
 	MatrixMN::MatrixMN(const Vector2& vector_, bool row_) noexcept 
-		: matrix{}
-		, numOfRow(1)
-		, numOfCol(2)
+		: matrix{}, numOfRow(1), numOfCol(2)
 	{
 		if (row_)
 		{
@@ -57,9 +53,7 @@ namespace zg {
 		}
 	}
 	MatrixMN::MatrixMN(const Vector3& vector_, bool row_) noexcept 
-		: matrix{}
-		, numOfRow(1)
-		, numOfCol(3)
+		: matrix{}, numOfRow(1), numOfCol(3)
 	{
 		if (row_)
 		{
@@ -81,9 +75,7 @@ namespace zg {
 		}
 	}
 	MatrixMN::MatrixMN(const std::vector<float>& arrayOfFloat_, bool row_) noexcept
-		: matrix{}
-		, numOfRow(1)
-		, numOfCol(arrayOfFloat_.size())
+		: matrix{}, numOfRow(1), numOfCol(arrayOfFloat_.size())
 	{
 		if (row_)
 		{
@@ -104,13 +96,11 @@ namespace zg {
 		}
 	}
 	MatrixMN::MatrixMN(const std::vector<std::vector<float>>& arrayOfFloat_) noexcept
-		: matrix{arrayOfFloat_}
-		, numOfRow(arrayOfFloat_.size())
-		, numOfCol(arrayOfFloat_[0].size())
+		: matrix{arrayOfFloat_}, numOfRow(arrayOfFloat_.size()), numOfCol(arrayOfFloat_[0].size())
 	{
 	}
 
-	//setters
+// ---------- setters
 	void MatrixMN::SetIdentity() 
 	{
 		if (IsSquare())
@@ -160,7 +150,8 @@ namespace zg {
 		numOfCol = numOfRow ^ numOfCol;
 		numOfRow = numOfRow ^ numOfCol;
 	}
-
+	
+// ---------- getters
 	bool MatrixMN::IsSquare() const {
 		return numOfCol == numOfRow;
 	}
@@ -183,7 +174,8 @@ namespace zg {
 		tmp.Transpose();
 		return tmp;
 	}
-
+	
+// ---------- friend
 	MatrixMN operator*(const MatrixMN& lhs, const MatrixMN& rhs) 
 	{
 		if (lhs.numOfCol == rhs.numOfRow)
@@ -279,4 +271,4 @@ namespace zg {
 			return MatrixMN{};
 	}
 
-}//namespace zg
+} // namespace ddd
